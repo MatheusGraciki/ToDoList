@@ -2,32 +2,30 @@ import React, { useState, useEffect } from 'react';
 import { View } from 'react-native';
 import { Dimensions } from 'react-native';
 
-interface Props {
-  children: React.ReactNode;
-}
+const ResponsiveScreen = ({children}) => {
+    const screenWidth = Dimensions.get('screen').width;
+    const screenHeight = Dimensions.get('screen').height;
 
-const ResponsiveScreen: React.FC<Props> = ({ children }) => {
-  const [screenWidth, setScreenWidth] = useState(Dimensions.get('window').width);
-  const [screenHeight, setScreenHeight] = useState(Dimensions.get('window').height);
+    const [isPortrait, setIsPortrait] = useState(screenHeight > screenWidth);
+    const [dimensions, setDimensions] = useState({ screenWidth, screenHeight });
 
-  useEffect(() => {
-    const handleOrientationChange = () => {
-      setScreenWidth(Dimensions.get('window').width);
-      setScreenHeight(Dimensions.get('window').height);
+    const updateOrientation = ({screen:any}) => {
+        setIsPortrait(screen.height > screen.width);
+        setDimensions({ screenWidth: screen.width, screenHeight: screen.height });
     };
-    Dimensions.addEventListener('change', handleOrientationChange);
-  }, []);
 
-  
+    useEffect(() => {
+        Dimensions.addEventListener('change', updateOrientation);
+    }, []);
 
-  return (
-    <View style={{
-        width: screenWidth,
-        height: screenHeight
-    }}>
-      {children}
-    </View>
-  );
+    return (
+        <View style={{
+            width: dimensions.screenWidth,
+            height: dimensions.screenHeight
+        }}>
+            {children}
+        </View>
+    );
 };
 
 export default ResponsiveScreen;
