@@ -1,9 +1,10 @@
 //import liraries
-import React, { Component } from 'react';
+import React from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
 // create a component
 const CreateTask = () => {
+
     return (
         <View style={styles.container}>
             <Text>CreateTask</Text>
