@@ -1,7 +1,7 @@
 import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
-
+import {NativeBaseProvider } from "native-base";
 
 // screens
 import CreateTask from "./screens/tabs/createtask";
@@ -16,14 +16,16 @@ export default function Routes() {
     const Stack = createNativeStackNavigator();
 
     return(
-        <NavigationContainer>
-            <Stack.Navigator initialRouteName="Home">
-                <Stack.Screen name="Login" component={Login} />
-                <Stack.Screen name="Registration" component={Registration} />
-                <Stack.Screen name="Home" component={Home} />
-                <Stack.Screen name="CreateTask" component={CreateTask} />
-            </Stack.Navigator>
-        </NavigationContainer>
+        <NativeBaseProvider>
+            <NavigationContainer>
+                <Stack.Navigator initialRouteName="Home">
+                    <Stack.Screen name="Login" component={Login} />
+                    <Stack.Screen name="Registration" component={Registration} />
+                    <Stack.Screen name="Home" component={Home} />
+                    <Stack.Screen name="CreateTask" component={CreateTask} />
+                </Stack.Navigator>
+            </NavigationContainer>
+        </NativeBaseProvider>
     );
 }
 
