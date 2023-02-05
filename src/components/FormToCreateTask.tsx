@@ -53,7 +53,7 @@ function FormToCreateTask() {
                     maxLength: {
                         value: 20,
                         message: " A descrição da tarefa deve ter no máximo 20 caracteres"
-}
+                    }
                 }}
                 control={control}
                 render={({ field: { onChange, } }) => (
